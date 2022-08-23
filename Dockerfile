@@ -1,10 +1,11 @@
-FROM python:3.7-alpine
-WORKDIR /code
-ENV FLASK_APP=app.py
-ENV FLASK_RUN_HOST=0.0.0.0
-RUN apk add --no-cache gcc musl-dev linux-headers
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
-EXPOSE 5000
-COPY . .
-CMD ["flask", "run"]
+FROM centos:latest
+RUN yum install -y http \
+  zip \
+ unzip
+ADD https://www.free-css.com/assests/files/free-css-templates/download/page258/loxury.zip /var/www/html/
+WORKDIR /var/www/html
+RUN unzip loxury.zip
+RUN cp -rvf loxury/* .
+RUN rm -rf loxury loxury.zip
+CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+EXPOSE 80
