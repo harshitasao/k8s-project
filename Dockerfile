@@ -7,6 +7,6 @@ ADD https://www.free-css.com/assets/files/free-css-templates/download/page1/acad
 WORKDIR /var/www/html
 RUN unzip academic-education.zip
 RUN cp -rvf academic-education/* .
-RUN rm -rf academic-education.zip
+RUN rm -rf academic-education academic-education.zip
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 EXPOSE 80
