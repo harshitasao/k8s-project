@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: k8sproject
+spec:
+  selector:
+    matchLabels: 
+      app: k8sproject
+  replicas: 2
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+
+  template:
+    metadata:
+      labels:
+        apps: k8sproject
+      spec:
+        containers:
+        - name: k8sproject
+          image: harshita09sao/k8sproject
+          imagePullPolicy: Always
+          ports:
+          - containerPort: 80
